@@ -1,11 +1,463 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+:root {
+  --sidebar-width: 16rem;
+}
+
+body {
+  @apply bg-gray-50/75 antialiased text-gray-900;
+}
+
+label {
+  @apply text-sm;
+}
+
+.x-button {
+  @apply font-semibold;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media (min-width: 640px) {
+  .sm\:max-w-xl {
+    max-width: 48rem !important;
+  }
+  .sm\:max-w-3xl {
+    max-width: 64rem !important;
+  }
+}
+
+.vue3-easy-data-table {
+  @apply w-full overflow-x-auto relative rounded-lg bg-white ring-1 ring-primary-100;
+}
+
+/* Table container */
+.vue3-easy-data-table__main {
+  @apply overflow-x-auto flex flex-col;
+  min-height: 160px;
+}
+
+.overflow-hidden-table {
+  overflow: unset !important;
+}
+
+.overflow-hidden-table .vue3-easy-data-table__main {
+  overflow: unset !important;
+}
+/* Scrollbar styles */
+.vue3-easy-data-table__main::-webkit-scrollbar {
+  @apply h-1.5 w-1.5 bg-transparent cursor-pointer;
+}
+
+.vue3-easy-data-table__main::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+.vue3-easy-data-table__main::-webkit-scrollbar-thumb {
+  @apply bg-gray-800 hover:bg-primary-500 transition cursor-pointer rounded-sm;
+}
+
+/* Border cell */
+.vue3-easy-data-table .border-cell tr td,
+.vue3-easy-data-table .border-cell tr th {
+  @apply border-r border-slate-200;
+}
+
+.vue3-easy-data-table .border-cell tr td.can-expand,
+.vue3-easy-data-table .border-cell tr th {
+  @apply border-r-0;
+}
+
+/* Table */
+.vue3-easy-data-table table {
+  width: 100%;
+}
+
+/* Teableheader row */
+.vue3-easy-data-table__header tr {
+  @apply bg-primary-700 border-b;
+}
+
+/* Table header th tag */
+.vue3-easy-data-table__header tr th {
+  @apply text-left p-3 font-bold text-xs uppercase relative whitespace-nowrap select-none text-white bg-primary-500;
+}
+
+/* Fixed header */
+
+.table-fixed .vue3-easy-data-table__main {
+  max-height: 80dvh;
+  thead tr {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+  }
+}
+
+/* Table body td tag */
+.vue3-easy-data-table__body tr td {
+  @apply border-b p-4 text-sm font-medium align-middle;
+}
+
+.compact .vue3-easy-data-table__body tr td {
+  @apply p-2;
+}
+
+.tablefixed .vue3-easy-data-table__body tr td {
+  @apply whitespace-nowrap bg-white;
+}
+
+.table-fixed-width {
+  @apply md:overflow-visible sm:overflow-x-auto;
+}
+
+.table-fixed-width .vue3-easy-data-table__main {
+  @apply md:overflow-visible sm:overflow-x-auto;
+}
+/* Table body tr */
+.vue3-easy-data-table__body tr {
+  @apply hover:bg-primary-50 transition;
+}
+.vue3-easy-data-table__body.row-alternation tr {
+  @apply even:bg-slate-50;
+}
+
+.text-wrap .vue3-easy-data-table__header tr th {
+  text-wrap: wrap;
+}
+
+/* table head sort icons */
+/* None */
+.vue3-easy-data-table__header tr th.sortable.none .sortType-icon {
+  @apply border hover:bg-success-400 ml-3 border-white inline-block p-1 -rotate-45
+transition duration-300 cursor-pointer;
+}
+/* Asce */
+.vue3-easy-data-table__header tr th.sortable.asc .sortType-icon {
+  @apply border-t-2 border-r-2 ml-3 border-success-400 inline-block p-1 -rotate-45
+transition duration-300 cursor-pointer;
+}
+/* Desc */
+.vue3-easy-data-table__header tr th.sortable.desc .sortType-icon {
+  @apply border-b-2 border-l-2 ml-3 border-success-400 inline-block p-1 -rotate-45
+transition duration-300 cursor-pointer;
+}
+/* make sortable headers use cursor pointer */
+.vue3-easy-data-table__header tr th.sortable {
+  @apply cursor-pointer;
+}
+
+/* Expand slot */
+.vue3-easy-data-table__body tr td.expand {
+  @apply px-3 py-1;
+}
+
+/* Expand Icon  */
+.expand-icon {
+  @apply border-t border-r border-slate-500 inline-block p-1 -rotate-45
+transition duration-300 cursor-pointer;
+}
+.expand-icon.expanding {
+  @apply rotate-[225deg] border-primary bg-primary;
+}
+
+/* Footer */
+
+.total-row {
+  @apply bg-[#e2e8f0];
+}
+.total-row td {
+  @apply !font-bold !border-r-0;
+}
+
+.vue3-easy-data-table__footer {
+  @apply flex flex-col items-start gap-5 lg:flex-row lg:items-center w-full p-3 text-sm border-t;
+}
+
+/* Rows per page */
+
+.pagination__rows-per-page {
+  @apply flex text-sm capitalize gap-x-3;
+}
+
+/* Row selector */
+.easy-data-table__rows-selector {
+  @apply flex relative;
+}
+
+/* Select input box */
+.rows-input__wrapper {
+  @apply border-b border-slate-400 flex gap-x-2 items-center justify-between  pb-1 px-3 cursor-pointer;
+}
+.rows-input__wrapper .triangle {
+  @apply inline-block h-2 w-2 border-4 border-transparent border-t-primary;
+}
+/* Selction dropdown */
+.vue3-easy-data-table__footer .select-items {
+  @apply hidden bg-white shadow-md rounded-md divide-y overflow-hidden transition duration-300;
+}
+
+.vue3-easy-data-table__footer .select-items.show {
+  @apply block absolute -top-[120px];
+}
+
+/* Select items inside dropdown */
+.vue3-easy-data-table__footer .select-items.show li {
+  @apply px-2 py-1 cursor-pointer hover:bg-primary-300;
+}
+.vue3-easy-data-table__footer .select-items.show li.selected {
+  @apply bg-primary text-white;
+}
+
+/* Paging buttons */
+.buttons-pagination {
+  @apply flex gap-x-2 items-center;
+}
+/* Button items */
+.buttons-pagination .item.button {
+  @apply flex items-center justify-center h-7 w-7 border rounded-full cursor-pointer transition text-xs;
+}
+.buttons-pagination .item.button.active {
+  @apply bg-gradient-to-r from-primary-400 via-primary to-primary-800 text-white border-primary-400;
+}
+
+/* Page index */
+.pagination__items-index {
+  @apply grow;
+}
+
+/* Paging arrows */
+.previous-page__click-button,
+.next-page__click-button {
+  @apply relative transition duration-150 focus:outline-none inline-flex items-center justify-center whitespace-nowrap overflow-hidden align-middle active:!shadow-none border rounded-md shadow-sm py-3 text-sm px-4 cursor-pointer hover:bg-primary-50;
+}
+.first-page,
+.last-page {
+  @apply shadow-none border-0 hover:bg-transparent opacity-25 cursor-default;
+}
+.previous-page__click-button .arrow,
+.next-page__click-button .arrow {
+  @apply inline-block w-2 h-2 border-t-2 border-l-2 border-gray-700;
+}
+.previous-page__click-button .arrow.arrow-left,
+.next-page__click-button .arrow.arrow-left {
+  @apply rotate-[135deg];
+}
+
+.previous-page__click-button .arrow.arrow-right,
+.next-page__click-button .arrow.arrow-right {
+  @apply rotate-[-45deg];
+}
+
+.show-shadow {
+  box-shadow: inset 3px 0px 15px 0px hsl(0deg 0% 0% / 15%);
+}
+
+/* Check box */
+.easy-checkbox
+  input[type='checkbox'].allSelected
+  + label[data-v-e0a0b7f0]:before,
+.easy-checkbox
+  input[type='checkbox'].partSelected
+  + label[data-v-e0a0b7f0]:before {
+  @apply bg-success-500;
+}
+
+.easy-checkbox {
+  position: relative;
+  width: 1.3em;
+  height: 1.3em;
+  font-size: 14px;
+  margin: 0 auto;
+}
+
+.easy-checkbox label {
+  cursor: pointer;
+  display: inline;
+  line-height: 1.3em;
+  vertical-align: top;
+  clear: both;
+}
+
+.easy-checkbox label:before,
+.easy-checkbox label:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.easy-checkbox label:before {
+  width: 1.3em;
+  height: 1.3em;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.54);
+  border-radius: 0.125em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.easy-checkbox input[type='checkbox'] {
+  outline: 0;
+  visibility: hidden;
+  width: 1.3em;
+  margin: 0;
+  display: block;
+  float: left;
+  font-size: inherit;
+}
+
+.easy-checkbox input[type='checkbox']:checked + label:before {
+  border: none;
+}
+
+.easy-checkbox input[type='checkbox']:checked + label:after {
+  transform: translate(0.2em, 0.3038461538em) rotate(-45deg);
+  width: 0.9em;
+  height: 0.45em;
+  border: 0.13em solid #fff;
+  border-top-style: none;
+  border-right-style: none;
+}
+
+.easy-checkbox input[type='checkbox'].allSelected + label:before {
+  border: none;
+}
+
+.easy-checkbox input[type='checkbox'].allSelected + label:after {
+  transform: translate(0.2em, 0.3038461538em) rotate(-45deg);
+  width: 0.9em;
+  height: 0.45em;
+  border: 0.13em solid #fff;
+  border-top-style: none;
+  border-right-style: none;
+}
+
+.easy-checkbox input[type='checkbox'].partSelected + label:before {
+  border: none;
+}
+
+.easy-checkbox input[type='checkbox'].partSelected + label:after {
+  transform: translate(0.2em, 0.5875em);
+  width: 0.9em;
+  height: 0.45em;
+  border: 0.125em solid #fff;
+  border-bottom-style: none;
+  border-right-style: none;
+  border-left-style: none;
+}
+
+.easy-checkbox input[type='checkbox']:checked + label:before {
+  @apply bg-success-500;
+}
+
+/* Table message */
+.vue3-easy-data-table__message {
+  @apply grid place-content-center p-4 h-full w-full flex-auto;
+}
+
+/* Table default loader */
+
+.vue3-easy-data-table__loading {
+  z-index: 3;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vue3-easy-data-table__loading .loading-entity {
+  @apply cursor-wait z-10;
+}
+
+.vue3-easy-data-table__loading-mask {
+  @apply bg-white/50 absolute w-full h-full top-0 left-0 z-10;
+}
+
+.lds-ring {
+  @apply inline-block relative h-16 w-16;
+}
+.lds-ring div {
+  @apply block absolute w-[80%] h-[80%] m-2 border-4 border-t-transparent rounded-full
+border-primary animate-spin;
+}
+
+.bg-vtd-primary-500 {
+  @apply bg-primary-500;
+}
+
+.text-vtd-secondary-400 {
+  @apply text-gray-400;
+}
+
+.bg-vtd-primary-100 {
+  @apply bg-primary-100;
+}
+
+.group-focus\:outline-\[color\:var\(--x-select-border\)\] {
+  min-height: 38px;
+}
+
+.x-popover-container.max-h-72 {
+  @apply !max-h-48;
+}
+
+.x-notification {
+  @apply z-50;
+}
+
+.vue3-easy-data-table.plain {
+  @apply shadow-none ring-0;
+}
+
+.plain .vue3-easy-data-table__header tr {
+  @apply bg-white;
+}
+
+.plain .vue3-easy-data-table__header tr th {
+  @apply text-gray-600 font-semibold;
+}
+
+.plain .vue3-easy-data-table__body tr td {
+  @apply font-normal;
+}
+
+.large-tip .x-popover-container {
+  @apply max-w-[420px];
+}
+
+.large-tip .arrow-t .x-popover-container::after {
+  left: 63%;
+}
+
+@media (max-width: 1250px) {
+  .comprehensive-conversion-container {
+    height: auto !important;
+  }
+}
+
+@media (max-width: 1250px) {
+  .comprehensive-conversion-container {
+    height: auto !important;
+  }
+}
+
+.yoyo-tip .max-w-xs {
+  @apply max-w-2xl;
 }
